@@ -34,7 +34,7 @@ public class Lease extends Contract
     {
         double principal = getTotalPrice();
         double rate = 0.04;
-        double time = 36;
+        double time = 3;
 
         return calculateMonthlyPayment(principal,rate,time);
 
