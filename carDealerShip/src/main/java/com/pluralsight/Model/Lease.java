@@ -2,15 +2,15 @@ package com.pluralsight.Model;
 
 public class Lease extends Contract
 {
-    private double expectedEndingValue;
-    private double leaseFee;
+    private double EXPECTED_ENDING_VALUE;
+    private final double LEASE_FEE;
 
 
-    public Lease(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double totalPrice, double expectedEndingValue, double leaseFee)
+    public Lease(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double totalPrice)
     {
         super(date, customerName, customerEmail, vehicleSold, monthlyPayment, totalPrice);
-        this.expectedEndingValue = expectedEndingValue;
-        this.leaseFee = leaseFee;
+        this.EXPECTED_ENDING_VALUE = totalPrice / 2;
+        this.LEASE_FEE = totalPrice * .07;
     }
 
     @Override
