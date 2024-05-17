@@ -7,12 +7,12 @@ public class Sales extends Contract
     private double processingFee;
     private boolean financed;
 
-    public Sales(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double totalPrice, boolean financed)
+    public Sales(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double salePrice, boolean financed)
     {
-        super(date, customerName, customerEmail, vehicleSold, monthlyPayment, totalPrice);
-        this.SALES_TAX = totalPrice * .05;
+        super(date, customerName, customerEmail, vehicleSold, monthlyPayment, salePrice);
+        this.SALES_TAX = salePrice * .05;
         this.RECORDING_FEE = 100;
-        this.processingFee = totalPrice < 10000 ? 295 : 495;
+        this.processingFee = salePrice < 10000 ? 295 : 495;
         this.financed = financed;
     }
 
