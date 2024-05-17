@@ -13,14 +13,40 @@ public class Lease extends Contract
         this.LEASE_FEE = salePrice * .07;
     }
 
-    @Override
-    public double getTotalPrice(){
-        return 0;
+    public double getExpectedEndingValue()
+    {
+        return expectedEndingValue;
+    }
+
+    public double getLEASE_FEE()
+    {
+        return LEASE_FEE;
     }
 
     @Override
-    public double getMonthlyPayment(){
-        return 0;
+    public double getTotalPrice()
+    {
+        return  getExpectedEndingValue() + getLEASE_FEE();
+    }
+
+    @Override
+    public double getMonthlyPayment()
+    {
+        double principal = getTotalPrice();
+        double rate = 0.04;
+        double time = 36;
+
+        return calculateMonthlyPayment(principal,rate,time);
+
+    }
+
+    public double calculateMonthlyPayment(double principal, double rate, double time)
+    {
+        double r = rate /(12*100);
+        double t = time *12;
+
+        return (principal * r * (double)Math.pow(1 + r,t)) / (double)(Math.pow(1+r,t) -1);
+
     }
 
 }
