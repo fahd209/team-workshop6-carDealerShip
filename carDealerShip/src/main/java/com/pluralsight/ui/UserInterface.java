@@ -51,6 +51,7 @@ public class UserInterface {
                 System.out.println(ColorCodes.YELLOW + "(7)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by color" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(8)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by mileage range" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(9)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by type (Sedan, truck, SUV, van)" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(10)" + ColorCodes.RESET + ColorCodes.CYAN +" - Buy or Lease");
                 System.out.println(ColorCodes.RED + "(0) - Save and quit" + ColorCodes.RESET);
                 System.out.print("Enter your input: ");
                 input = userInput.nextLine().strip().replace(" ", "");

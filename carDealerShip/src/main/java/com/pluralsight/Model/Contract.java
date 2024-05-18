@@ -4,17 +4,21 @@ public abstract class Contract {
     private String date;
     private String customerName;
     private String customerEmail;
-    private boolean vehicleSold;
+    private Vehicle vehicleSold;
     private double monthlyPayment;
     private double salePrice;
 
-    public Contract(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double salePrice) {
+    public Contract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.vehicleSold = vehicleSold;
-        this.monthlyPayment = monthlyPayment;
-        this.salePrice = salePrice;
+        this.salePrice = vehicleSold.getPrice();
+    }
+
+    public Vehicle getVehicleSold()
+    {
+        return vehicleSold;
     }
 
     public String getDate() {
@@ -41,13 +45,6 @@ public abstract class Contract {
         this.customerEmail = customerEmail;
     }
 
-    public boolean isVehicleSold() {
-        return vehicleSold;
-    }
-
-    public void setVehicleSold(boolean vehicleSold) {
-        this.vehicleSold = vehicleSold;
-    }
 
     public double getSalePrice() {
         return salePrice;

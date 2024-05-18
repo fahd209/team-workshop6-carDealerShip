@@ -8,6 +8,7 @@ public class DealerShip {
     String address;
     String phone;
     ArrayList<Vehicle> inventory = new ArrayList<>();
+    ArrayList<Contract> contracts = new ArrayList<>();
 
     public DealerShip(String name, String address, String phone)
     {
@@ -44,6 +45,16 @@ public class DealerShip {
     {
 
         return inventory;
+    }
+
+    public void addContract(Contract contract)
+    {
+        contracts.add(contract);
+    }
+
+    public ArrayList<Contract> getAllContracts()
+    {
+        return contracts;
     }
 
     public void addVehicle(Vehicle vehicle)

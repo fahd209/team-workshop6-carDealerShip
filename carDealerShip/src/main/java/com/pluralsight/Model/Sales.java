@@ -7,12 +7,12 @@ public class Sales extends Contract
     private double processingFee;
     private boolean financed;
 
-    public Sales(String date, String customerName, String customerEmail, boolean vehicleSold, double monthlyPayment, double salePrice, boolean financed)
+    public Sales(String date, String customerName, String customerEmail, Vehicle vehicleSold , boolean financed)
     {
-        super(date, customerName, customerEmail, vehicleSold, monthlyPayment, salePrice);
-        this.SALES_TAX = salePrice * .05;
+        super(date, customerName, customerEmail, vehicleSold);
+        this.SALES_TAX = vehicleSold.getPrice() * .05;
         this.RECORDING_FEE = 100;
-        this.processingFee = salePrice < 10000 ? 295 : 495;
+        this.processingFee = vehicleSold.getPrice() < 10000 ? 295 : 495;
         this.financed = financed;
     }
 
@@ -49,17 +49,19 @@ public class Sales extends Contract
     @Override
     public double getMonthlyPayment()
     {
+        double monthlyInterestRate = 0.0425 / 12;
         double monthlyPayment = 0;
 
         if(isFinanced())
         {
             if(getTotalPrice() >= 10000)
             {
-                monthlyPayment = 4.25 * (getTotalPrice() / 48);
+                monthlyPayment = monthlyInterestRate * getTotalPrice() / (1 - Math.pow(1 + monthlyInterestRate, -48));
             }
             else
             {
-                monthlyPayment = 5.25 * (getTotalPrice() / 24);
+                double monthlyInterestRateBelow10000 = 0.0525 / 12;
+                monthlyPayment = monthlyInterestRateBelow10000 * getTotalPrice() / (1 - Math.pow(1 + monthlyInterestRateBelow10000, -24));
             }
         }
         return monthlyPayment;
