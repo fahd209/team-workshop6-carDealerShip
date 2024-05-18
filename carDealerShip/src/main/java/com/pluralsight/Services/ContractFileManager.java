@@ -9,15 +9,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ContractFileManager {
-    public static void saveContract()
+    public static void saveContract(DealerShip dealerShip)
     {
         // getting all the contract from the dealership
-        ArrayList<Contract> contracts = FileManager.getDealership().getAllContracts();
+        ArrayList<Contract> contracts = dealerShip.getAllContracts();
         File file = new File("files/contracts.csv");
 
         // writing to file
         try(
-                FileWriter fileWriter = new FileWriter(file);
+                FileWriter fileWriter = new FileWriter(file,true);
                 PrintWriter writer = new PrintWriter(fileWriter)
                 )
         {

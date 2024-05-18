@@ -1,9 +1,11 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.Model.DealerShip;
-import com.pluralsight.Model.Vehicle;
+import com.pluralsight.Model.*;
+import com.pluralsight.Services.ContractFileManager;
 import com.pluralsight.Services.FileManager;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.InputMismatchException;
@@ -51,7 +53,8 @@ public class UserInterface {
                 System.out.println(ColorCodes.YELLOW + "(7)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by color" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(8)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by mileage range" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(9)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by type (Sedan, truck, SUV, van)" + ColorCodes.RESET);
-                System.out.println(ColorCodes.YELLOW + "(10)" + ColorCodes.RESET + ColorCodes.CYAN +" - Buy or Lease");
+                System.out.println(ColorCodes.YELLOW + "(10)" + ColorCodes.RESET + ColorCodes.CYAN +" - Buy Vehicle" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(11)" + ColorCodes.RESET + ColorCodes.CYAN +" - Lease Vehicle" + ColorCodes.RESET);
                 System.out.println(ColorCodes.RED + "(0) - Save and quit" + ColorCodes.RESET);
                 System.out.print("Enter your input: ");
                 input = userInput.nextLine().strip().replace(" ", "");
@@ -85,9 +88,16 @@ public class UserInterface {
                     case 9:
                         findVehicleByType(dealerShip);
                         break;
+                    case 10:
+                        buyVehicle(dealerShip);
+                        break;
+                    case 11:
+                        leaseVehicle(dealerShip);
+                        break;
                     case 0:
                         System.out.println();
                         FileManager.saveDealerShip(dealerShip);
+                        ContractFileManager.saveContract(dealerShip);
                         System.out.println("Good bye :)");
                         break;
                     default:
@@ -468,4 +478,49 @@ public class UserInterface {
             System.out.println("Something went wrong, try again");
         }
     }
+
+    public void buyVehicle(DealerShip dealerShip)
+    {
+        System.out.println();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        String date = currentDate.format(formatter);
+        System.out.print("Enter you're Name: ");
+        String name = userInput.nextLine().strip();
+        System.out.print("Enter you're Email: ");
+        String email = userInput.nextLine().strip();
+        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+        int vin = Integer.parseInt(userInput.nextLine().strip());
+        System.out.print("Would you like to Finance the vehicle (Yes/No): ");
+        boolean isFinance = userInput.nextLine().strip().equalsIgnoreCase("yes");
+
+        //Search for vehicle in dealership arrayList
+        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+        Contract sale = new Sales(date,name,email,vehicle,isFinance);
+        dealerShip.addContract(sale);
+        dealerShip.removeVehicle(vehicle);
+    }
+
+    public void leaseVehicle(DealerShip dealerShip)
+    {
+        System.out.println();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        String date = currentDate.format(formatter);
+        System.out.print("Enter you're Name: ");
+        String name = userInput.nextLine().strip();
+        System.out.print("Enter you're Email: ");
+        String email = userInput.nextLine().strip();
+        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+        int vin = Integer.parseInt(userInput.nextLine().strip());
+
+        //Search for vehicle in dealership arrayList
+        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+        Contract lease = new Lease(date,name,email,vehicle);
+        dealerShip.addContract(lease);
+        dealerShip.removeVehicle(vehicle);
+    }
+
+
+
 }

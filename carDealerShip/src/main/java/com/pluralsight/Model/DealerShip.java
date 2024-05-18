@@ -109,4 +109,11 @@ public class DealerShip {
                 .filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
                 .collect(Collectors.toList());
     }
+
+    public Vehicle getVehicleByVinNumber(int vinNumber)
+    {
+        return getAllVehicles().stream()
+                .filter(vehicle1 -> vehicle1.getVin() == vinNumber)
+                .findFirst().get();
+    }
 }
