@@ -3,7 +3,7 @@
 I made a car dealer ship project for a car sales man. This project will include a dealer ship and vehicles. The project will allow the user to add, remove, and search for cars in the inventory. 
 
 UML for project:
-![umlForProject](Images/diagramSS.png)
+![umlForProject](images/diagramSS.png)
 
 ## Phase 1
 
@@ -241,7 +241,7 @@ Sample test:
 
 Example of how to use the application:
 
-![listAllVehicles](Images/listAllVehiclesSS.png)
+![listAllVehicles](images/listAllVehiclesSS.png)
 
 
 To use this application you will run it in the terminal and choose any of the list option depending on what you want to do.
