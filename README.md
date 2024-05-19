@@ -480,3 +480,56 @@ finance: yes/no
 
 monthly payment: total cost is what is financed - 4.25% for 48 months (if over $10,000) or 5.25% for 24 months (if under)
 
+## Phase 3
+
+We updated the User Interface with two more methods. We have A buyvehicle = a "Sale" of a vehicle. As well for a leaseVehicle = a "Lease" of a vehicle. We asked the customer for their details and in order to retrieve and filter through what vehicle they wanted the customer had to provide us with their vehicle vin they are interested in. Once that is provided we are able to add that vehicle to our contracts.csv file and removed from the inventory.csv file.
+
+```java
+    public void buyVehicle(DealerShip dealerShip)
+    {
+        System.out.println();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        String date = currentDate.format(formatter);
+        System.out.print("Enter you're Name: ");
+        String name = userInput.nextLine().strip();
+        System.out.print("Enter you're Email: ");
+        String email = userInput.nextLine().strip();
+        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+        int vin = Integer.parseInt(userInput.nextLine().strip());
+        System.out.print("Would you like to Finance the vehicle (Yes/No): ");
+        boolean isFinance = userInput.nextLine().strip().equalsIgnoreCase("yes");
+        System.out.print("AWESOME, Let's go start the paperwork!");
+        System.out.println();
+        System.out.println();
+
+        //Search for vehicle in dealership arrayList
+        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+        Contract sale = new Sales(date,name,email,vehicle,isFinance);
+        dealerShip.addContract(sale);
+        dealerShip.removeVehicle(vehicle);
+    }
+
+    public void leaseVehicle(DealerShip dealerShip)
+    {
+        System.out.println();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        String date = currentDate.format(formatter);
+        System.out.print("Enter you're Name: ");
+        String name = userInput.nextLine().strip();
+        System.out.print("Enter you're Email: ");
+        String email = userInput.nextLine().strip();
+        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+        int vin = Integer.parseInt(userInput.nextLine().strip());
+        System.out.print("AWESOME, Let's go start the paperwork!");
+        System.out.println();
+        System.out.println();
+
+        //Search for vehicle in dealership arrayList
+        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+        Contract lease = new Lease(date,name,email,vehicle);
+        dealerShip.addContract(lease);
+        dealerShip.removeVehicle(vehicle);
+    }
+```
