@@ -329,7 +329,7 @@ public class Sales extends Contract
 
 ## Phase 2 
 
-We created a Contract File Manager which we have an Array List where we get all the Contracts. Once we sell a vehicle, it will be printed differently in our contracts.csv file. Depending on what instance it is wether it is Sale of a Lease.  
+We created a Contract File Manager which we have an Array List where we get all the Contracts. Once we sell a vehicle, it will be printed differently in our contracts.csv file. Depending on what instance it is wether it is Sale or a Lease.  
 
 ```java
 package com.pluralsight.Services;
@@ -408,21 +408,37 @@ The imagen below shows how the it shows wether it is Sale or Lease.
 It starts with wether its a Lease or Contract. 
 
 For the Lease line item:
+
 Type = Lease
+
 contract date: year month day
+
 name: name of buyer
+
 email: email of buyer
+
 car id: car vin
+
 year: year of car
+
 make: make of car
+
 model: model of car
+
 vehicle type: type of car
+
 color: color of car
+
 odometer: odometer reading of car
+
 price: price of car
+
 ending value: 1/2 the price of the car
+
 lease fee: 7% of the original price of the car
+
 total cost: (price - ending value) + lease fee
+
 monthly payment: total cost is what is financed - 4.0% for 36 months 
 
 As for the Sale Line item:
