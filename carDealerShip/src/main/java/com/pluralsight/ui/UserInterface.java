@@ -493,6 +493,9 @@ public class UserInterface {
         int vin = Integer.parseInt(userInput.nextLine().strip());
         System.out.print("Would you like to Finance the vehicle (Yes/No): ");
         boolean isFinance = userInput.nextLine().strip().equalsIgnoreCase("yes");
+        System.out.print("AWESOME, Let's go start the paperwork!");
+        System.out.println();
+        System.out.println();
 
         //Search for vehicle in dealership arrayList
         Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
@@ -513,6 +516,9 @@ public class UserInterface {
         String email = userInput.nextLine().strip();
         System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
         int vin = Integer.parseInt(userInput.nextLine().strip());
+        System.out.print("AWESOME, Let's go start the paperwork!");
+        System.out.println();
+        System.out.println();
 
         //Search for vehicle in dealership arrayList
         Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
