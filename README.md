@@ -326,3 +326,157 @@ public class Sales extends Contract
     }
 }
 ```
+
+## Phase 2 
+
+We created a Contract File Manager which we have an Array List where we get all the Contracts. Once we sell a vehicle, it will be printed differently in our contracts.csv file. Depending on what instance it is wether it is Sale or a Lease.  
+
+```java
+package com.pluralsight.Services;
+
+import com.pluralsight.Model.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+public class ContractFileManager {
+    public static void saveContract(DealerShip dealerShip)
+    {
+        // getting all the contract from the dealership
+        ArrayList<Contract> contracts = dealerShip.getAllContracts();
+        File file = new File("files/contracts.csv");
+
+        // writing to file
+        try(
+                FileWriter fileWriter = new FileWriter(file,true);
+                PrintWriter writer = new PrintWriter(fileWriter)
+                )
+        {
+           for (Contract contract : contracts)
+           {
+               // getting the vehicle being sold
+               Vehicle vehicle = contract.getVehicleSold();
+
+               // checking if the contract is sale or lease
+               if(contract instanceof Sales)
+               {
+
+                   // checking if the vehicle is financed
+                   String isFinanced = ((Sales) contract).isFinanced() ? "Yes" : "No";
+                   if(isFinanced.equalsIgnoreCase("yes")) {
+                       writer.printf(" Sale | %s | %s | %s | %d | %d | %s | %s | %s | %s | %d | %.2f | %.2f | %.2f | %.2f | %.2f | %s | %.2f \n",
+                               contract.getDate(), contract.getCustomerName(), contract.getCustomerEmail(), vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice(),
+                               ((Sales) contract).getSALES_TAX(), ((Sales) contract).getRECORDING_FEE(), ((Sales) contract).getProcessingFee(), contract.getTotalPrice(),
+                               isFinanced, contract.getMonthlyPayment());
+                   }
+                   else {
+                       writer.printf(" Sale | %s | %s | %s | %d | %d | %s | %s | %s | %s | %d | %.2f | %.2f | %.2f | %.2f | %.2f | %s  \n",
+                               contract.getDate(), contract.getCustomerName(), contract.getCustomerEmail(), vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice(),
+                               ((Sales) contract).getSALES_TAX(), ((Sales) contract).getRECORDING_FEE(), ((Sales) contract).getProcessingFee(), contract.getTotalPrice(),
+                               isFinanced);
+                   }
+               }
+               else if(contract instanceof Lease)
+               {
+                   writer.printf(" LEASE | %s | %s | %s | %d | %d | %s | %s | %s | %s | %d | %.2f | %.2f | %.2f | %.2f | %.2f \n",
+                           contract.getDate(), contract.getCustomerName(), contract.getCustomerEmail(), vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice(),
+                           ((Lease) contract).getExpectedEndingValue(), ((Lease) contract).getLEASE_FEE(), contract.getTotalPrice(), contract.getMonthlyPayment());
+               }
+           }
+        }
+        catch (IOException e)
+        {
+            System.out.println("File not found");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Something went wrong");
+        }
+    }
+}
+```
+
+The imagen below shows how the it shows wether it is Sale or Lease. 
+
+```java
+ LEASE | 2024-05-17 | fahd | fahds@lol.com | 7412 | 2022 | Chevrolet | Silverado | Truck | White | 40000 | 38000.00 | 19000.00 | 2660.00 | 21660.00 | 602.04 
+ Sale | 2024-05-19 | Alexis | alexis@gmail.com | 4123 | 2015 | honda | civic | sedan | black | 2000 | 20000.00 | 1000.00 | 100.00 | 495.00 | 21595.00 | Yes | 490.01
+```
+It starts with wether its a Lease or Contract. 
+
+## For the Lease line item:
+
+Type = Lease
+
+contract date: year month day
+
+name: name of buyer
+
+email: email of buyer
+
+car id: car vin
+
+year: year of car
+
+make: make of car
+
+model: model of car
+
+vehicle type: type of car
+
+color: color of car
+
+odometer: odometer reading of car
+
+price: price of car
+
+ending value: 1/2 the price of the car
+
+lease fee: 7% of the original price of the car
+
+total cost: (price - ending value) + lease fee
+
+monthly payment: total cost is what is financed - 4.0% for 36 months 
+
+
+## As for the Sale Line item:
+
+Type = Sale
+
+contract date: year month day
+
+name: name of buyer
+
+email: email of buyer
+
+car id: car vin
+
+year: year of car
+
+make: make of car
+
+model: model of car
+
+vehicle type: type of car
+
+color: color of car
+
+odometer: odometer reading of car
+
+price: price of car
+
+sales tax: sales tax (5% of vehicle price)
+
+recording fee: always $100
+
+processing fee: $295 for vehicles under 10,000 $495 for all others
+
+total cost: price + sales tax + recording fee + processing fee
+
+finance: yes/no
+
+monthly payment: total cost is what is financed - 4.25% for 48 months (if over $10,000) or 5.25% for 24 months (if under)
+
