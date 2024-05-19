@@ -399,7 +399,7 @@ public class ContractFileManager {
 }
 ```
 
-The imagen below shows how the it shows wether it is Sale or Lease. 
+The imagen below shows how the it shows wether it is Sale or Lease in our contracts.csv file. 
 
 ```java
  LEASE | 2024-05-17 | fahd | fahds@lol.com | 7412 | 2022 | Chevrolet | Silverado | Truck | White | 40000 | 38000.00 | 19000.00 | 2660.00 | 21660.00 | 602.04 
