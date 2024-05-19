@@ -482,7 +482,7 @@ monthly payment: total cost is what is financed - 4.25% for 48 months (if over $
 
 ## Phase 3
 
-We updated the User Interface with two more methods. We have A buyvehicle = a "Sale" of a vehicle. As well for a leaseVehicle = a "Lease" of a vehicle. We asked the customer for their details and in order to retrieve and filter through what vehicle they wanted the customer had to provide us with their vehicle vin they are interested in. Once that is provided we are able to add that vehicle to our contracts.csv file and removed from the inventory.csv file.
+We updated the User Interface with two more methods. We have A buyvehicle = a "Sale" of a vehicle. As well for a leaseVehicle = a "Lease" of a vehicle. We asked the customer for their details and in order to retrieve the vehicle and filter through what vehicle they wanted then the customer had to provide us with their vehicle vin they are interested in. Once that is provided we are able to add that vehicle to our contracts.csv file and removed from the inventory.csv file.
 
 ```java
     public void buyVehicle(DealerShip dealerShip)
