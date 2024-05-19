@@ -407,7 +407,7 @@ The imagen below shows how the it shows wether it is Sale or Lease.
 ```
 It starts with wether its a Lease or Contract. 
 
-For the Lease line item:
+## For the Lease line item:
 
 Type = Lease
 
@@ -441,24 +441,42 @@ total cost: (price - ending value) + lease fee
 
 monthly payment: total cost is what is financed - 4.0% for 36 months 
 
-As for the Sale Line item:
+
+## As for the Sale Line item:
 
 Type = Sale
+
 contract date: year month day
+
 name: name of buyer
+
 email: email of buyer
+
 car id: car vin
+
 year: year of car
+
 make: make of car
+
 model: model of car
+
 vehicle type: type of car
+
 color: color of car
+
 odometer: odometer reading of car
+
 price: price of car
+
 sales tax: sales tax (5% of vehicle price)
+
 recording fee: always $100
+
 processing fee: $295 for vehicles under 10,000 $495 for all others
+
 total cost: price + sales tax + recording fee + processing fee
+
 finance: yes/no
+
 monthly payment: total cost is what is financed - 4.25% for 48 months (if over $10,000) or 5.25% for 24 months (if under)
 
