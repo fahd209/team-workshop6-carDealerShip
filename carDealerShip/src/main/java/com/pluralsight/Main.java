@@ -1,6 +1,5 @@
 package com.pluralsight;
 
-import com.pluralsight.Services.ContractFileManager;
 import com.pluralsight.ui.UserInterface;
 
 public class Main {

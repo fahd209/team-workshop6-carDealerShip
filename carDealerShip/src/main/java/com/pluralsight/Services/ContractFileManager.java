@@ -44,7 +44,6 @@ public class ContractFileManager {
                                ((Sales) contract).getSALES_TAX(), ((Sales) contract).getRECORDING_FEE(), ((Sales) contract).getProcessingFee(), contract.getTotalPrice(),
                                isFinanced);
                    }
-
                }
                else if(contract instanceof Lease)
                {
