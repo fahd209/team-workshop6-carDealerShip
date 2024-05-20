@@ -53,8 +53,7 @@ public class UserInterface {
                 System.out.println(ColorCodes.YELLOW + "(7)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by color" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(8)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by mileage range" + ColorCodes.RESET);
                 System.out.println(ColorCodes.YELLOW + "(9)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by type (Sedan, truck, SUV, van)" + ColorCodes.RESET);
-                System.out.println(ColorCodes.YELLOW + "(10)" + ColorCodes.RESET + ColorCodes.CYAN +" - Buy Vehicle" + ColorCodes.RESET);
-                System.out.println(ColorCodes.YELLOW + "(11)" + ColorCodes.RESET + ColorCodes.CYAN +" - Lease Vehicle" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(10)" + ColorCodes.RESET + ColorCodes.CYAN +" - Buy Vehicle/ Lease Vehicle" + ColorCodes.RESET);
                 System.out.println(ColorCodes.RED + "(0) - Save and quit" + ColorCodes.RESET);
                 System.out.print("Enter your input: ");
                 input = userInput.nextLine().strip().replace(" ", "");
@@ -89,10 +88,7 @@ public class UserInterface {
                         findVehicleByType(dealerShip);
                         break;
                     case 10:
-                        buyVehicle(dealerShip);
-                        break;
-                    case 11:
-                        leaseVehicle(dealerShip);
+                        leaseOrBuyVehicle(dealerShip);
                         break;
                     case 0:
                         System.out.println();
@@ -479,6 +475,27 @@ public class UserInterface {
         }
     }
 
+    public void leaseOrBuyVehicle(DealerShip dealerShip)
+    {
+        // prompting user to buy or lease
+        System.out.println();
+        System.out.println("(1) - buy vehicle");
+        System.out.println("(2) - lease vehicle");
+        System.out.println("(3) - Cancel");
+        System.out.print("Enter choice:");
+        int choice = Integer.parseInt(userInput.nextLine());
+        switch (choice)
+        {
+            case 1:
+                buyVehicle(dealerShip);
+                break;
+            case 2:
+                leaseVehicle(dealerShip);
+                break;
+            case 3:
+                break;
+        }
+    }
     public void buyVehicle(DealerShip dealerShip)
     {
         // prompting user for info and searching for vehicle with vin number
@@ -552,7 +569,4 @@ public class UserInterface {
             System.out.println("Something went wrong, try again");
         }
     }
-
-
-
 }
