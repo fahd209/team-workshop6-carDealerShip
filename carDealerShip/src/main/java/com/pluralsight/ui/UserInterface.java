@@ -481,50 +481,76 @@ public class UserInterface {
 
     public void buyVehicle(DealerShip dealerShip)
     {
-        System.out.println();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-        String date = currentDate.format(formatter);
-        System.out.print("Enter you're Name: ");
-        String name = userInput.nextLine().strip();
-        System.out.print("Enter you're Email: ");
-        String email = userInput.nextLine().strip();
-        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
-        int vin = Integer.parseInt(userInput.nextLine().strip());
-        System.out.print("Would you like to Finance the vehicle (Yes/No): ");
-        boolean isFinance = userInput.nextLine().strip().equalsIgnoreCase("yes");
-        System.out.print("AWESOME, Let's go start the paperwork!");
-        System.out.println();
-        System.out.println();
+        // prompting user for info and searching for vehicle with vin number
+        try {
+            System.out.println();
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+            String date = currentDate.format(formatter);
+            System.out.print("Enter you're Name: ");
+            String name = userInput.nextLine().strip();
+            System.out.print("Enter you're Email: ");
+            String email = userInput.nextLine().strip();
+            System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+            int vin = Integer.parseInt(userInput.nextLine().strip());
+            System.out.print("Would you like to Finance the vehicle (Yes/No): ");
+            boolean isFinance = userInput.nextLine().strip().equalsIgnoreCase("yes");
+            System.out.print("AWESOME, Let's go start the paperwork!");
+            System.out.println();
+            System.out.println();
 
-        //Search for vehicle in dealership arrayList
-        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
-        Contract sale = new Sales(date,name,email,vehicle,isFinance);
-        dealerShip.addContract(sale);
-        dealerShip.removeVehicle(vehicle);
+            //Search for vehicle in dealership arrayList
+            Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+            Contract sale = new Sales(date, name, email, vehicle, isFinance);
+            dealerShip.addContract(sale);
+            dealerShip.removeVehicle(vehicle);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println();
+            System.out.println("Please enter a number for the vin number");
+        }
+        catch (Exception e)
+        {
+            System.out.println();
+            System.out.println("Something went wrong, try again");
+        }
     }
 
     public void leaseVehicle(DealerShip dealerShip)
     {
-        System.out.println();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-        String date = currentDate.format(formatter);
-        System.out.print("Enter you're Name: ");
-        String name = userInput.nextLine().strip();
-        System.out.print("Enter you're Email: ");
-        String email = userInput.nextLine().strip();
-        System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
-        int vin = Integer.parseInt(userInput.nextLine().strip());
-        System.out.print("AWESOME, Let's go start the paperwork!");
-        System.out.println();
-        System.out.println();
+        // prompting user for info and searching for vehicle with vin number
+        try {
+            System.out.println();
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+            String date = currentDate.format(formatter);
+            System.out.print("Enter you're Name: ");
+            String name = userInput.nextLine().strip();
+            System.out.print("Enter you're Email: ");
+            String email = userInput.nextLine().strip();
+            System.out.print("Enter the Vin of the Vehicle you would like to purchase: ");
+            int vin = Integer.parseInt(userInput.nextLine().strip());
+            System.out.print("AWESOME, Let's go start the paperwork!");
+            System.out.println();
+            System.out.println();
 
-        //Search for vehicle in dealership arrayList
-        Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
-        Contract lease = new Lease(date,name,email,vehicle);
-        dealerShip.addContract(lease);
-        dealerShip.removeVehicle(vehicle);
+            //Search for vehicle in dealership arrayList
+            Vehicle vehicle = dealerShip.getVehicleByVinNumber(vin);
+            Contract lease = new Lease(date, name, email, vehicle);
+            dealerShip.addContract(lease);
+            dealerShip.removeVehicle(vehicle);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println();
+            System.out.println("Invalid input, please enter only numbers for vin number");
+        }
+        catch (Exception e)
+        {
+            System.out.println();
+            System.out.println("Something went wrong, try again");
+        }
     }
 
 
